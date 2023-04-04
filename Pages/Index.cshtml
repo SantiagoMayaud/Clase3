@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Peliculas";
+}
+<!--Esta parte del código es lo que va a ver el usuario.-->
+<div class="text-center">
+    <h1 class="display-4">Peliculas</h1>
+</div>
+
+<ul> <!--Esta parte es una lista con los items de la lista de peliculas. El código entre li hace que cada item sea un link que manda a la página de detalle de cada pelicula.-->
+    @foreach (var item in Model.MovieList)
+    {
+        <li>
+            <a asp-page="MovieDetail" asp-route-code="@item.Code">@item.Name</a>
+        </li>
+    }
+</ul>
+
+<!--Esta parte es una serie de cajas donde el usuario puede ingresar las partes requeridas de una nueva pelicula para agregarla a la lista.-->
+<form method="post">
+      <div class="mb-3">
+    <label asp-for="NewMovie.Code" class="form-label"></label>
+    <input type="text" class="form-control" asp-for="NewMovie.Code">
+  </div>
+  <div class="mb-3">
+    <label asp-for="NewMovie.Name" class="form-label"></label>
+    <input type="text" class="form-control" asp-for="NewMovie.Name">
+  </div>
+  <div class="mb-3">
+    <label asp-for="NewMovie.Category" class="form-label"></label>
+    <input type="text" class="form-control" asp-for="NewMovie.Category">
+  </div>
+  <div class="mb-3">
+    <label asp-for="NewMovie.Minutes" class="form-label"></label>
+    <input type="number" class="form-control" asp-for="NewMovie.Minutes">
+  </div>
+    <div class="mb-3">
+    <label asp-for="NewMovie.Review" class="form-label"></label>
+    <textarea class="form-control" asp-for="NewMovie.Review" cols="5"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar Nueva Pelicula</button> <!--Al hacer click en este botón, se hace una llamada "post" que toma el form method de arriba.-->
+</form>
